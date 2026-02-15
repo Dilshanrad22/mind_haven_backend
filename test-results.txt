@@ -1,0 +1,227 @@
+﻿≡ƒÜÇ Starting Backend Authentication Tests...
+
+============================================================
+
+
+≡ƒôï TEST 1: Regular User Signup
+------------------------------------------------------------
+
+≡ƒô¥ Testing Signup: Regular User
+Request Data: {
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "name": "John Doe",
+  "userType": "user",
+  "phone": "+1234567890",
+  "address": "123 Main St, New York, NY",
+  "dateOfBirth": "1990-05-15",
+  "gender": "male"
+}
+Status: 409
+Response: {
+  "success": false,
+  "message": "User with this email already exists"
+}
+Γ¥î Signup Failed!
+
+
+≡ƒôï TEST 2: Doctor Signup
+------------------------------------------------------------
+
+≡ƒô¥ Testing Signup: Doctor
+Request Data: {
+  "email": "dr.smith@example.com",
+  "password": "doctor123",
+  "name": "Dr. Sarah Smith",
+  "userType": "doctor",
+  "phone": "+1987654321",
+  "address": "456 Medical Center, Los Angeles, CA",
+  "dateOfBirth": "1985-08-20",
+  "gender": "female"
+}
+Status: 409
+Response: {
+  "success": false,
+  "message": "User with this email already exists"
+}
+Γ¥î Signup Failed!
+
+
+≡ƒôï TEST 3: Regular User Login
+------------------------------------------------------------
+
+≡ƒöæ Testing Login: Regular User
+Email: john.doe@example.com
+Status: 200
+Response: {
+  "success": true,
+  "message": "Login successful",
+  "data": {
+    "user": {
+      "_id": "69914ea74accbcf736ce6e36",
+      "email": "john.doe@example.com",
+      "name": "John Doe",
+      "userType": "user",
+      "phone": "+1234567890",
+      "address": "123 Main St, New York, NY",
+      "dateOfBirth": "1990-05-15T00:00:00.000Z",
+      "gender": "male",
+      "isActive": true,
+      "isEmailVerified": false,
+      "createdAt": "2026-02-15T04:42:16.004Z",
+      "doctorProfile": null
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTkxNGVhNzRhY2NiY2Y3MzZjZTZlMzYiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwidXNlclR5cGUiOiJ1c2VyIiwiaWF0IjoxNzcxMTMwNTk4LCJleHAiOjE3NzE3MzUzOTh9.p3inkmHPu1Z1OWq40l8CQtAygDBhZypYO9EFdhtNBa4"
+  }
+}
+Γ£à Login Successful!
+
+
+≡ƒôï TEST 4: Doctor Login
+------------------------------------------------------------
+
+≡ƒöæ Testing Login: Doctor
+Email: dr.smith@example.com
+Status: 200
+Response: {
+  "success": true,
+  "message": "Login successful",
+  "data": {
+    "user": {
+      "_id": "69914ea84accbcf736ce6e39",
+      "email": "dr.smith@example.com",
+      "name": "Dr. Sarah Smith",
+      "userType": "doctor",
+      "phone": "+1987654321",
+      "address": "456 Medical Center, Los Angeles, CA",
+      "dateOfBirth": "1985-08-20T00:00:00.000Z",
+      "gender": "female",
+      "isActive": true,
+      "isEmailVerified": false,
+      "createdAt": "2026-02-15T04:42:16.674Z",
+      "doctorProfile": {
+        "_id": "69914ea94accbcf736ce6e3b",
+        "specialization": "General",
+        "licenseNumber": "TEMP-1771130537081",
+        "qualification": [
+          "To be updated"
+        ],
+        "experience": 0,
+        "consultationFee": 0,
+        "rating": 0,
+        "totalReviews": 0,
+        "bio": "",
+        "isVerified": false
+      }
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTkxNGVhODRhY2NiY2Y3MzZjZTZlMzkiLCJlbWFpbCI6ImRyLnNtaXRoQGV4YW1wbGUuY29tIiwidXNlclR5cGUiOiJkb2N0b3IiLCJpYXQiOjE3NzExMzA2MDMsImV4cCI6MTc3MTczNTQwM30.gzajjUxF9_jobRVI0tm9bWadGBzK5b0DeVnq1Z_A8F8"
+  }
+}
+Γ£à Login Successful!
+
+
+≡ƒôï TEST 5: Get User Profile
+------------------------------------------------------------
+
+≡ƒæñ Testing Get Profile: Regular User
+Status: 200
+Response: {
+  "success": true,
+  "data": {
+    "_id": "69914ea74accbcf736ce6e36",
+    "email": "john.doe@example.com",
+    "name": "John Doe",
+    "userType": "user",
+    "phone": "+1234567890",
+    "address": "123 Main St, New York, NY",
+    "dateOfBirth": "1990-05-15T00:00:00.000Z",
+    "gender": "male",
+    "isActive": true,
+    "isEmailVerified": false,
+    "createdAt": "2026-02-15T04:42:16.004Z",
+    "updatedAt": "2026-02-15T04:42:16.004Z",
+    "doctorProfile": null
+  }
+}
+Γ£à Get Profile Successful!
+
+
+≡ƒôï TEST 6: Get Doctor Profile
+------------------------------------------------------------
+
+≡ƒæñ Testing Get Profile: Doctor
+Status: 200
+Response: {
+  "success": true,
+  "data": {
+    "_id": "69914ea84accbcf736ce6e39",
+    "email": "dr.smith@example.com",
+    "name": "Dr. Sarah Smith",
+    "userType": "doctor",
+    "phone": "+1987654321",
+    "address": "456 Medical Center, Los Angeles, CA",
+    "dateOfBirth": "1985-08-20T00:00:00.000Z",
+    "gender": "female",
+    "isActive": true,
+    "isEmailVerified": false,
+    "createdAt": "2026-02-15T04:42:16.674Z",
+    "updatedAt": "2026-02-15T04:42:16.674Z",
+    "doctorProfile": {
+      "_id": "69914ea94accbcf736ce6e3b",
+      "specialization": "General",
+      "licenseNumber": "TEMP-1771130537081",
+      "qualification": [
+        "To be updated"
+      ],
+      "experience": 0,
+      "consultationFee": 0,
+      "availableSlots": [],
+      "rating": 0,
+      "totalReviews": 0,
+      "bio": "",
+      "services": [],
+      "isVerified": false
+    }
+  }
+}
+Γ£à Get Profile Successful!
+
+
+≡ƒôï TEST 7: Duplicate Email Signup (Should Fail)
+------------------------------------------------------------
+
+≡ƒô¥ Testing Signup: Duplicate User
+Request Data: {
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "name": "John Doe",
+  "userType": "user",
+  "phone": "+1234567890",
+  "address": "123 Main St, New York, NY",
+  "dateOfBirth": "1990-05-15",
+  "gender": "male"
+}
+Status: 409
+Response: {
+  "success": false,
+  "message": "User with this email already exists"
+}
+Γ¥î Signup Failed!
+
+
+≡ƒôï TEST 8: Invalid Login (Should Fail)
+------------------------------------------------------------
+
+≡ƒöæ Testing Login: Invalid Password
+Email: john.doe@example.com
+Status: 401
+Response: {
+  "success": false,
+  "message": "Invalid email or password"
+}
+Γ¥î Login Failed!
+
+
+============================================================
+Γ£à All Tests Completed!
+============================================================

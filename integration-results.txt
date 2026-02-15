@@ -1,0 +1,76 @@
+﻿≡ƒöì MIND HAVEN - FULL STACK INTEGRATION TEST
+
+======================================================================
+[36m
+≡ƒôí TEST 1: Backend Server Health Check[0m
+[0m----------------------------------------------------------------------[0m
+[32mΓ£à Backend Server: ONLINE[0m
+[34m   Uptime: 39 seconds[0m
+[34m   Timestamp: 2026-02-15T04:48:28.926Z[0m
+[36m
+≡ƒÆ╛ TEST 2: Database Connection Check[0m
+[0m----------------------------------------------------------------------[0m
+[32mΓ£à Database Connection: ACTIVE[0m
+[34m   Message: Mind Haven Backend API is running![0m
+[36m
+≡ƒöÉ TEST 3: User Authentication Flow[0m
+[0m----------------------------------------------------------------------[0m
+[33m
+  Step 3a: Creating new test user...[0m
+[32m  Γ£à User Created Successfully[0m
+[34m     Email: test_1771130908942@example.com[0m
+[34m     User ID: 6991501e0a3944c6ab0369d5[0m
+[33m
+  Step 3b: Testing login with created user...[0m
+[32m  Γ£à Login Successful[0m
+[34m     Token Generated: eyJhbGciOiJIUzI1NiIsInR5cCI6Ik...[0m
+[33m
+  Step 3c: Verifying JWT token...[0m
+[32m  Γ£à Token Verification: SUCCESS[0m
+[34m     Retrieved Profile: Test User[0m
+[36m
+≡ƒæ¿ΓÇìΓÜò∩╕Å TEST 4: Doctor Registration & Profile Creation[0m
+[0m----------------------------------------------------------------------[0m
+[32mΓ£à Doctor Account Created[0m
+[34m   Email: doctor_1771130912902@example.com[0m
+[32mΓ£à Doctor Profile Auto-Created[0m
+[34m   Specialization: General[0m
+[36m
+≡ƒôï TEST 5: Fetch Doctors List[0m
+[0m----------------------------------------------------------------------[0m
+[32mΓ£à Doctors Retrieved: undefined doctor(s) found[0m
+[34m   Sample Doctor: Dr. Dr. Sarah Smith[0m
+[34m   Specialization: General[0m
+[36m
+≡ƒîÉ TEST 6: Frontend Server Check[0m
+[0m----------------------------------------------------------------------[0m
+[32mΓ£à Frontend Server: ONLINE[0m
+[34m   Status: 200 OK[0m
+[34m   URL: http://localhost:3000[0m
+[36m
+
+======================================================================[0m
+[36m≡ƒôè INTEGRATION TEST SUMMARY[0m
+[36m======================================================================[0m
+[33m
+Test Results:[0m
+[32m  Γ£à 1. Backend Server Health[0m
+[32m  Γ£à 2. Database Connection[0m
+[32m  Γ£à 3. User Authentication Flow[0m
+[32m  Γ£à 4. Doctor Registration Flow[0m
+[32m  Γ£à 5. Get Doctors Endpoint[0m
+[32m  Γ£à 6. Frontend Server[0m
+[0m
+======================================================================[0m
+[32m
+≡ƒÄ» FINAL SCORE: 6/6 Tests Passed (100%)[0m
+[32m
+≡ƒÄë CONGRATULATIONS! Your full stack is working perfectly![0m
+[32m   Γ£à Frontend: Running[0m
+[32m   Γ£à Backend: Running[0m
+[32m   Γ£à Database: Connected[0m
+[32m   Γ£à Authentication: Working[0m
+[32m   Γ£à All Features: Operational[0m
+[0m
+======================================================================
+[0m

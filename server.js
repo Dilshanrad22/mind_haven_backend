@@ -1,58 +1,75 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-require('dotenv').config();
+const connectDB = require('./src/config/database');
 
+// Import routes
+const authRoutes = require('./src/routes/auth');
+const doctorRoutes = require('./src/routes/doctors');
+
+// Initialize express app
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+// Connect to MongoDB
+connectDB();
 
 // Middleware
 app.use(helmet()); // Security headers
-app.use(cors()); // Enable CORS
-app.use(morgan('combined')); // Logging
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  credentials: true,
+}));
+app.use(morgan('dev')); // Logger
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Routes
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Welcome to Mind Haven Backend API',
-        status: 'Server is running successfully!',
-        timestamp: new Date().toISOString()
-    });
+app.use('/api/auth', authRoutes);
+app.use('/api/doctors', doctorRoutes);
+
+// Test route
+app.get('/api/test', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Mind Haven Backend API is running!',
+    timestamp: new Date().toISOString(),
+  });
 });
 
+// Health check route
 app.get('/api/health', (req, res) => {
-    res.json({
-        status: 'OK',
-        message: 'Server is healthy',
-        timestamp: new Date().toISOString()
-    });
+  res.json({
+    success: true,
+    status: 'healthy',
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // 404 handler
-app.use((req, res, next) => {
-    res.status(404).json({
-        error: 'Route not found',
-        message: `The requested route ${req.originalUrl} does not exist.`
-    });
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+  });
 });
 
-// Error handling middleware
+// Error handler
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({
-        error: 'Something went wrong!',
-        message: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
-    });
+  console.error('Error:', err);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Internal Server Error',
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
+  });
 });
 
 // Start server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-    console.log(`📍 Local: http://localhost:${PORT}`);
-    console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`\n🚀 Server running on port ${PORT}`);
+  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🌐 Frontend URL: ${process.env.FRONTEND_URL || 'http://localhost:3000'}\n`);
 });
-
-module.exports = app;

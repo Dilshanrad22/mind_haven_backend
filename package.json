@@ -1,6 +1,7 @@
 {
   "name": "mind_haven_backend",
   "version": "1.0.0",
+  "description": "Backend API for Mind Haven Mental Wellness Platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -11,19 +12,30 @@
     "type": "git",
     "url": "git+https://github.com/Dilshanrad22/mind_haven_backend.git"
   },
-  "keywords": [],
+  "keywords": [
+    "mental-health",
+    "wellness",
+    "api",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Dilshanrad22/mind_haven_backend/issues"
   },
   "homepage": "https://github.com/Dilshanrad22/mind_haven_backend#readme",
-  "description": "",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.2",
-    "express": "^5.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.3",
     "morgan": "^1.10.1"
   },
   "devDependencies": {
