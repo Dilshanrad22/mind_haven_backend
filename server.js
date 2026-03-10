@@ -8,6 +8,11 @@ const connectDB = require('./src/config/database');
 // Import routes
 const authRoutes = require('./src/routes/auth');
 const doctorRoutes = require('./src/routes/doctors');
+const appointmentRoutes = require('./src/routes/appointments');
+const messageRoutes = require('./src/routes/messages');
+const articleRoutes = require('./src/routes/articles');
+const notificationRoutes = require('./src/routes/notifications');
+const reviewRoutes = require('./src/routes/reviews');
 
 // Initialize express app
 const app = express();
@@ -28,6 +33,11 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/doctors', doctorRoutes);
+app.use('/api/appointments', appointmentRoutes);
+app.use('/api/messages', messageRoutes);
+app.use('/api/articles', articleRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Test route
 app.get('/api/test', (req, res) => {
