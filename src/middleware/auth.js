@@ -80,8 +80,21 @@ const authorizeUser = (req, res, next) => {
   }
 };
 
+// Check if user is an admin
+const authorizeAdmin = (req, res, next) => {
+  if (req.user && req.user.userType === 'admin') {
+    next();
+  } else {
+    res.status(403).json({
+      success: false,
+      message: 'Access denied. Admin access required.',
+    });
+  }
+};
+
 module.exports = {
   protect,
   authorizeDoctor,
   authorizeUser,
+  authorizeAdmin,
 };
