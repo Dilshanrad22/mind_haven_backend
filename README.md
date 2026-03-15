@@ -75,6 +75,33 @@ Server will run on: **http://localhost:5000**
 
 ---
 
+## ☁️ Deploy on Render
+
+### Option 1: Blueprint (recommended)
+
+1. Push this backend folder to GitHub.
+2. In Render, create a new Blueprint service and select the repo.
+3. Render will detect `render.yaml` automatically.
+4. Set these required env vars in Render:
+  - `MONGODB_URI`
+  - `JWT_SECRET`
+  - `FRONTEND_URL` (use your frontend URL, or multiple URLs separated by commas)
+
+### Option 2: Manual Web Service
+
+- Environment: `Node`
+- Build command: `npm install`
+- Start command: `npm start`
+- Health check path: `/api/health`
+
+### Render Notes
+
+- `PORT` is provided by Render automatically (default `10000` in `render.yaml`).
+- CORS supports multiple frontend URLs via comma-separated `FRONTEND_URL`.
+- Root endpoint `/` and `/api/health` are available for quick service checks.
+
+---
+
 ## 📍 API Endpoints
 
 ### Authentication Routes (`/api/auth`)

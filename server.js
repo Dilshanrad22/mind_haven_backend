@@ -21,10 +21,23 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
+// Render runs behind a reverse proxy.
+app.set('trust proxy', 1);
+
+const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 // Middleware
 app.use(helmet()); // Security headers
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Allow non-browser requests (e.g., server-to-server and health checks).
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 }));
 app.use(morgan('dev')); // Logger
@@ -42,6 +55,14 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Test route
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Mind Haven Backend API',
+    docs: '/api/test',
+  });
+});
+
 app.get('/api/test', (req, res) => {
   res.json({
     success: true,
