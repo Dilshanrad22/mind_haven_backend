@@ -24,9 +24,11 @@ connectDB();
 // Render runs behind a reverse proxy.
 app.set('trust proxy', 1);
 
+const normalizeOrigin = (origin) => origin.trim().replace(/\/+$/, '').toLowerCase();
+
 const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:3000')
   .split(',')
-  .map((origin) => origin.trim())
+  .map(normalizeOrigin)
   .filter(Boolean);
 
 // Middleware
@@ -35,7 +37,8 @@ app.use(cors({
   origin: (origin, callback) => {
     // Allow non-browser requests (e.g., server-to-server and health checks).
     if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
+    const normalizedOrigin = normalizeOrigin(origin);
+    if (allowedOrigins.includes(normalizedOrigin)) return callback(null, true);
     return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
